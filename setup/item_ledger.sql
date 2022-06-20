@@ -1,9 +1,9 @@
 USE DATABASE SALES_REPORTING;
 CREATE TABLE IF NOT EXISTS ITEM_LEDGER (
-    "entry" text not null,
-    "item" text,
-    "posting_date" text,
-    "customer" text,
-    "document" text,
-    "external_document" text
+    "entry" TEXT NOT NULL PRIMARY KEY,
+    "item" TEXT,
+    "posting_date" TEXT,
+    "customer" TEXT,
+    "document" TEXT,
+    "external_document" TEXT
 );

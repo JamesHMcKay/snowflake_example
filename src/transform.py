@@ -8,6 +8,7 @@ def fix_trailing_decimals(data):
 def fix_types(data, schema):
     for col, type_ in schema.items():
         data[col] = data[col].astype(type_)
+    return data
 
 
 def set_column_names(data, columns):

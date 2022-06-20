@@ -1,5 +1,5 @@
 USE DATABASE SALES_REPORTING;
 CREATE TABLE IF NOT EXISTS PRODUCT_GROUPS (
-    "code" text not null,
-    "name" text
+    "code" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT
 );

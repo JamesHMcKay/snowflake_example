@@ -1,10 +1,10 @@
 USE DATABASE SALES_REPORTING;
 CREATE TABLE IF NOT EXISTS ITEMS (
-    "id" text not null,
-    "description" text,
-    "vendor_item_id" text,
-    "inventory_posting_group" text,
-    "vendor_id" text,
-    "replenishment_method" text,
-    "product_group_code" text
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "description" TEXT,
+    "vendor_item_id" TEXT,
+    "inventory_posting_group" TEXT,
+    "vendor_id" TEXT,
+    "replenishment_method" TEXT,
+    "product_group_code" TEXT
 );
