@@ -1,0 +1,1 @@
+Log files will written to this folder.

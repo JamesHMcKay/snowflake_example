@@ -1,0 +1,5 @@
+USE DATABASE SALES_REPORTING;
+CREATE TABLE IF NOT EXISTS CUSTOMER_GROUPS (
+    "code" text not null,
+    "name" text
+);

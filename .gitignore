@@ -1,0 +1,8 @@
+config.yaml
+*xlsx
+*xls
+*csv
+
+*/__pycache__
+logs/*.log
+env/
