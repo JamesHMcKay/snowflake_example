@@ -5,34 +5,30 @@ from database import SnowflakeDatabase
 from load_config import load_yaml_file
 
 import models
-from validation import check_columns
+from transform import fix_trailing_decimals, fix_types, set_column_names
+from validation import check_columns, check_primary_key_is_unique
 
 logging.config.fileConfig("logging.conf")
 
 logger = logging.getLogger(__name__)
 
 
-def load_sales_item_table(snowflake, filename, table):
+def load_data(snowflake, filename, table):
     logger.info(f"Loading raw data for table {table.name}")
 
     data = pd.read_excel(filename, sheet_name=table.sheet_name, dtype=str)
-    if len(data[table.primary_key]) == len(data[table.primary_key].unique()):
-        logger.info("Confirmed that No. is unique")
-    else:
-        logger.error("No. is not unique")
-        raise ValueError("No. is not unique")
 
-    if not check_columns(data, table.columns.keys()):
-        raise Exception("Input data failed validation")
-    else:
-        logger.info("Input data passed column validation")
+    check_primary_key_is_unique(data, table.primary_key)
 
-    data.rename(columns=table.columns, inplace=True)
+    check_columns(data, table.columns.keys())
 
-    data.replace(r".0$", "", regex=True, inplace=True)
+    logger.info("Input data passed column and primary key validation")
 
-    for col, type_ in table.schema.items():
-        data[col] = data[col].astype(type_)
+    data = set_column_names(data, table.columns)
+
+    data = fix_trailing_decimals(data)
+
+    data = fix_types(data, table.schema)
 
     snowflake.write(data, table.name)
     logger.info(f"Loaded raw data for table {table.name}")
@@ -56,7 +52,7 @@ def run():
     ]
 
     for table in tables:
-        load_sales_item_table(snowflake, config["raw_file"], table)
+        load_data(snowflake, config["raw_file"], table)
 
 
 if __name__ == "__main__":
