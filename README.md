@@ -1,6 +1,6 @@
 # Snowflake example
 
-This project a small example of loading data in a Snowflake database using the python connector. I also include an example task which is created on the Snowflake cluster to do a little bit of scheduled processing.
+This repository contains a small example of loading data in a Snowflake database using the python connector. I also include an example task which is created on the Snowflake cluster to do a little bit of scheduled processing.
 
 
 ## Quick start
